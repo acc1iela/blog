@@ -5,7 +5,7 @@ import { useTheme } from 'next-themes';
 export default function Themebutton() {
   const { setTheme, resolvedTheme } = useTheme();
   return (
-    <button>
+    <button onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}>
       {resolvedTheme === 'dark' ? (
         <svg
           xmlns="http://www.w3.org/2000/svg"
