@@ -1,6 +1,8 @@
 import { Post } from '@/app/lib/interface';
 import { client } from '@/app/lib/sanity';
+import { urlFor } from '@/app/lib/sanityImageUrl';
 import { PortableText } from '@portabletext/react';
+import Image from 'next/image';
 
 async function getData(slug: string) {
   const query = `*[_type == 'post' && slug.current == '${slug}'][0]`;
@@ -11,6 +13,20 @@ async function getData(slug: string) {
 
 export default async function SlugPage({ params }: { params: { slug: string } }) {
   const data = (await getData(params.slug)) as Post;
+
+  const PortableTextComponents = {
+    types: {
+      image: ({ value }: { value: any }) => {
+        <Image
+          src={urlFor(value).url()}
+          alt="Image"
+          className="rounded-lg"
+          width={700}
+          height={700}
+        />;
+      },
+    },
+  };
 
   return (
     <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
