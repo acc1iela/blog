@@ -1,3 +1,4 @@
+import { Post } from '@/app/lib/interface';
 import { client } from '@/app/lib/sanity';
 import { PortableText } from '@portabletext/react';
 
@@ -9,7 +10,7 @@ async function getData(slug: string) {
 }
 
 export default async function SlugPage({ params }: { params: { slug: string } }) {
-  const data = await getData(params.slug);
+  const data = (await getData(params.slug)) as Post;
 
   return (
     <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
