@@ -1,20 +1,19 @@
-## Getting Started
+## Memo
 
-````bash
+```bash
 npm run dev
 # or
 yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-sanity localhost
-cd sanity/
+# sanity localhost
+# cd sanity/
 
-```bash
 npm run dev
 #or
 yarn dev
-````
+```
 
 ## blog url
 
