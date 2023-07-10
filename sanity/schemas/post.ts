@@ -1,3 +1,5 @@
+import {CustomMarkdownInput} from '../CustomMarkdownInput'
+
 export default {
   name: 'post',
   type: 'document',
@@ -7,6 +9,13 @@ export default {
       name: 'title',
       type: 'string',
       title: 'Title',
+    },
+    {
+      name: 'markdownContent',
+      title: 'Markdown Content',
+      type: 'markdown',
+      description: 'The main content for the post',
+      inputComponent: CustomMarkdownInput,
     },
     {
       name: 'overview',
@@ -22,9 +31,9 @@ export default {
       },
     },
     {
-      name: 'content',
+      name: 'bodyContent',
       type: 'array',
-      title: 'Content',
+      title: 'Body Content',
       of: [
         {
           type: 'block',
