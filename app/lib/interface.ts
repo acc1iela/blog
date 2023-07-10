@@ -6,5 +6,6 @@ export interface Post {
   slug: {
     current: string;
   };
+  markdownContent: string;
   _createdAt: string;
 }

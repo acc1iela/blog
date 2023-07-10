@@ -2,6 +2,7 @@ import { Post } from '@/app/lib/interface';
 import { client } from '@/app/lib/sanity';
 import { urlFor } from '@/app/lib/sanityImageUrl';
 import { PortableText } from '@portabletext/react';
+import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 
 async function getData(slug: string) {
@@ -16,10 +17,10 @@ export default async function SlugPage({ params }: { params: { slug: string } })
 
   const PortableTextComponent = {
     types: {
-      image: ({ value }: { value: any }) => (
+      image: ({ node }: { node: any }) => (
         <Image
-          src={urlFor(value).url()}
-          alt="Image"
+          src={urlFor(node.asset).url()}
+          alt={node.alt || 'Image'}
           className="rounded-lg"
           width={700}
           height={700}
@@ -50,7 +51,7 @@ export default async function SlugPage({ params }: { params: { slug: string } })
       <div className="divide-y divide-gray-200 pb-7 dark:divide-gray-700 xl:divide-y-0">
         <div className="divide-y divide-gray-200 dark:divide-gray-700 xl:col-span-3 xl:row-span-2 xl:pb-0">
           <div className="prose max-w-none pb-8 pt-10 dark:prose-invert prose-lg">
-            <PortableText value={data.content} components={PortableTextComponent} />
+            <ReactMarkdown>{data.markdownContent}</ReactMarkdown>
           </div>
         </div>
       </div>
