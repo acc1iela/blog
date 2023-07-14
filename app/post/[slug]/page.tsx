@@ -12,14 +12,21 @@ async function getData(slug: string) {
   return data;
 }
 
+type ImageNode = {
+  asset: {
+    _ref: string;
+  };
+  alt?: string;
+};
+
 export default async function SlugPage({ params }: { params: { slug: string } }) {
   const data = (await getData(params.slug)) as Post;
 
   const PortableTextComponent = {
     types: {
-      image: ({ node }: { node: any }) => (
+      image: ({ node }: { node: ImageNode }) => (
         <Image
-          src={urlFor(node.asset).url()}
+          src={urlFor(node.asset._ref).url()}
           alt={node.alt || 'Image'}
           className="rounded-lg"
           width={700}
