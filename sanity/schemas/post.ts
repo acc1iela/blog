@@ -14,7 +14,7 @@ export default {
       name: 'markdownContent',
       title: 'Markdown Content',
       type: 'markdown',
-      description: 'The main content for the post',
+      description: 'The main content for post',
       inputComponent: CustomMarkdownInput,
     },
     {
