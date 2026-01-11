@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+
+const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={post.data.title} description={post.data.description}>
+  <article class="py-8">
+    <header class="mb-8 text-center">
+      <time class="text-sm text-gray-500 dark:text-gray-400">
+        {formattedDate}
+      </time>
+      <h1 class="mt-2 text-3xl font-bold sm:text-4xl">
+        {post.data.title}
+      </h1>
+      <div class="mt-4 flex justify-center flex-wrap gap-2">
+        {post.data.tags.map((tag) => (
+          <a
+            href={`/blog/tag/${tag}`}
+            class="px-3 py-1 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-accent hover:text-white transition-colors"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    </header>
+
+    <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
+      <div class="prose prose-lg dark:prose-invert max-w-none">
+        <Content />
+      </div>
+
+      {headings.length > 0 && (
+        <aside class="hidden lg:block">
+          <div class="sticky top-24">
+            <TableOfContents headings={headings} />
+          </div>
+        </aside>
+      )}
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import TagList from '@/components/TagList.astro';
+import SearchBox from '@/components/SearchBox';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
+);
+
+const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags))].sort();
+
+const postsData = sortedPosts.map((post) => ({
+  title: post.data.title,
+  description: post.data.description,
+  tags: post.data.tags,
+  publishedAt: post.data.publishedAt.toISOString(),
+  slug: post.slug,
+}));
+---
+
+<BaseLayout title="Blog" description="技術記事の一覧">
+  <section class="py-8">
+    <h1 class="text-3xl font-bold mb-8">Blog</h1>
+
+    <div class="space-y-6 mb-8">
+      <SearchBox client:load posts={postsData} />
+      <TagList tags={allTags} />
+    </div>
+
+    <div id="posts-container" class="grid gap-6 sm:grid-cols-2">
+      {sortedPosts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          description={post.data.description}
+          tags={post.data.tags}
+          publishedAt={post.data.publishedAt}
+          slug={post.slug}
+        />
+      ))}
+    </div>
+
+    {sortedPosts.length === 0 && (
+      <p class="text-gray-500 dark:text-gray-400 text-center py-12">
+        まだ記事がありません。
+      </p>
+    )}
+  </section>
+</BaseLayout>

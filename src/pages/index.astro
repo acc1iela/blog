@@ -1,0 +1,65 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Home">
+  <section class="py-12">
+    <div class="max-w-2xl">
+      <h1 class="text-4xl font-bold sm:text-5xl">
+        Hi, I'm <span class="text-accent">Accio</span>
+      </h1>
+      <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">
+        フロントエンドエンジニアとして日々コードを書いています。
+        このブログでは技術的な学びや発見を発信しています。
+      </p>
+      <div class="mt-6 flex gap-4">
+        <a
+          href="/blog"
+          class="px-4 py-2 bg-accent text-white rounded-lg hover:bg-accent-dark transition-colors"
+        >
+          Blog を見る
+        </a>
+        <a
+          href="/about"
+          class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg hover:border-accent hover:text-accent transition-colors"
+        >
+          About
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12">
+    <div class="flex justify-between items-center mb-8">
+      <h2 class="text-2xl font-bold">Recent Posts</h2>
+      <a href="/blog" class="text-accent hover:underline">
+        すべての記事を見る →
+      </a>
+    </div>
+
+    {recentPosts.length > 0 ? (
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {recentPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            tags={post.data.tags}
+            publishedAt={post.data.publishedAt}
+            slug={post.slug}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-gray-500 dark:text-gray-400">
+        まだ記事がありません。
+      </p>
+    )}
+  </section>
+</BaseLayout>
