@@ -4,8 +4,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 const skills = [
   { category: 'Languages', items: ['TypeScript', 'JavaScript', 'HTML', 'CSS'] },
   { category: 'Frameworks', items: ['React', 'Next.js', 'Astro', 'Tailwind CSS'] },
-  { category: 'Tools', items: ['Git', 'VS Code', 'Figma'] },
-];
+  { category: 'Architecture', items: ['Feature-based Design', 'Component Design'] },
+  { category: 'Testing', items: ['Jest', 'Testing Library', 'Storybook'] },
+  { category: 'Tooling', items: ['Git', 'GitHub', 'ESLint', 'Prettier', 'Cursor'] },
+  { category: 'Web', items: ['SSG', 'Markdown', 'SEO Basics'] },
+]
+
 ---
 
 <BaseLayout title="About" description="Accioについて">
@@ -14,12 +18,11 @@ const skills = [
 
     <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
       <p>
-        フロントエンドエンジニアとして働いています。
-        Webアプリケーションの開発を中心に、UI/UXの改善やパフォーマンス最適化に取り組んでいます。
+        フロントエンドエンジニアとして名古屋で働いてます。
+        Webアプリケーションの開発を中心に、フロントエンドの開発をしています。
       </p>
       <p>
-        新しい技術のキャッチアップが好きで、このブログでは学んだことや
-        日々の開発で得た知見を発信しています。
+        技術的なことから雑多なことまでブログに書いています。
       </p>
     </div>
 
