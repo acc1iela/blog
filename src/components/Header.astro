@@ -1,0 +1,38 @@
+---
+import ThemeToggle from './ThemeToggle';
+
+const navItems = [
+  { href: '/', label: 'Home' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="text-xl font-bold hover:opacity-80 transition-opacity">
+        Accio <span class="text-accent">Blog</span>
+      </a>
+
+      <nav class="flex items-center gap-6">
+        {navItems.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={[
+              'text-sm font-medium transition-colors',
+              currentPath === href || (href !== '/' && currentPath.startsWith(href))
+                ? 'text-accent'
+                : 'text-gray-600 dark:text-gray-300 hover:text-accent',
+            ]}
+          >
+            {label}
+          </a>
+        ))}
+        <ThemeToggle client:load />
+      </nav>
+    </div>
+  </div>
+</header>
