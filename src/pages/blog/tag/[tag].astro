@@ -48,7 +48,7 @@ const { posts, allTags } = Astro.props;
           description={post.data.description}
           tags={post.data.tags}
           publishedAt={post.data.publishedAt}
-          slug={post.slug}
+          slug={post.id}
         />
       ))}
     </div>

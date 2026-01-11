@@ -17,7 +17,7 @@ const postsData = sortedPosts.map((post) => ({
   description: post.data.description,
   tags: post.data.tags,
   publishedAt: post.data.publishedAt.toISOString(),
-  slug: post.slug,
+  slug: post.id,
 }));
 ---
 
@@ -37,7 +37,7 @@ const postsData = sortedPosts.map((post) => ({
           description={post.data.description}
           tags={post.data.tags}
           publishedAt={post.data.publishedAt}
-          slug={post.slug}
+          slug={post.id}
         />
       ))}
     </div>
