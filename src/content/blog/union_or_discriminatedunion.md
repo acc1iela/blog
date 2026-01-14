@@ -2,8 +2,7 @@
 title: 'Union型と判別可能ユニオンを使いこなしたい'
 description: 'TypeScriptの判別可能ユニオン（Discriminated Union）で型安全なコードを書く方法'
 tags: ['TypeScript']
-publishedAt: 2025-01-14
-draft: true
+publishedAt: 2026-01-14
 ---
 
 ## そもそも Union 型とは

@@ -2,7 +2,7 @@
 title: 'ブログをAstroで作り直した'
 description: 'Next.jsで作ってた個人ブログをAstroで書き直した話'
 tags: ['雑記', 'Astro']
-publishedAt: 2025-01-11
+publishedAt: 2026-01-11
 ---
 
 ## 作り直した理由
