@@ -14,3 +14,18 @@
     @apply text-accent hover:text-accent-dark dark:hover:text-accent-light transition-colors;
   }
 }
+
+/* SP対応: テーブルとコードブロックの横スクロール */
+@layer base {
+  .prose pre {
+    @apply overflow-x-auto;
+  }
+
+  .prose table {
+    @apply block overflow-x-auto whitespace-nowrap;
+  }
+
+  .prose code {
+    @apply break-words;
+  }
+}
