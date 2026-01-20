@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<'light' | 'dark' | null>(null);
 
+  // マウント時にDOMから現在のテーマを読み取る
+  // BaseLayout.astro のインラインスクリプトで既に適用済みなので、DOMを信頼の情報源にする
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
+    const isDark = document.documentElement.classList.contains('dark');
+    setTheme(isDark ? 'dark' : 'light');
   }, []);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
+  }, [theme]);
+
+  // 初期レンダリング中はプレースホルダーを表示（フラッシュ防止）
+  if (theme === null) {
+    return <div className="w-9 h-9" aria-hidden="true" />;
+  }
 
   return (
     <button
