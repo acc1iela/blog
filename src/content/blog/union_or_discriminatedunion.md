@@ -213,8 +213,8 @@ type UserSettings = {
 
 この定義では、以下のバグを許容してしまいます。
 
-1.  `notificationsEnabled: true` なのに `notificationEmail` が `undefined`
-2.  `notificationsEnabled: false` なのに `notificationEmail` が入っている（これはバグではないかもしれないが、データの整合性としては不自然だと思います）
+1. `notificationsEnabled: true` なのに `notificationEmail` が `undefined` になる
+2. `notificationsEnabled: false` なのに `notificationEmail` が入っている（これはバグではないかもしれないが、データの整合性としては不自然だと思います）
 
 ### ユニオン型による解決
 
