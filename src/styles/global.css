@@ -29,3 +29,13 @@
     @apply break-words;
   }
 }
+
+/* YouTube埋め込み */
+.youtube-embed {
+  @apply relative w-full my-6;
+  aspect-ratio: 16 / 9;
+}
+
+.youtube-embed iframe {
+  @apply absolute top-0 left-0 w-full h-full rounded-lg;
+}
