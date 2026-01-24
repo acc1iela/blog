@@ -2,6 +2,8 @@ import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
+import rehypeExternalLinks from 'rehype-external-links';
+import remarkYoutube from './src/plugins/remark-youtube.mjs';
 
 export default defineConfig({
   integrations: [
@@ -11,5 +13,17 @@ export default defineConfig({
     }),
     mdx(),
   ],
-  site: 'https://accio-blog.vercel.app',
+  site: 'https://acc1iela-blog.dev',
+  markdown: {
+    remarkPlugins: [remarkYoutube],
+    rehypePlugins: [
+      [
+        rehypeExternalLinks,
+        {
+          target: '_blank',
+          rel: ['noopener', 'noreferrer'],
+        },
+      ],
+    ],
+  },
 });
