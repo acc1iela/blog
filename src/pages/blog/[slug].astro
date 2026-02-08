@@ -14,19 +14,32 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
 
-const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', {
+const dateOptions: Intl.DateTimeFormatOptions = {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-});
+};
+
+const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', dateOptions);
+const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', dateOptions);
 ---
 
 <BaseLayout title={post.data.title} description={post.data.description} ogType="article">
   <article class="py-8">
     <header class="mb-8 text-center">
-      <time class="text-sm text-gray-500 dark:text-gray-400">
-        {formattedDate}
-      </time>
+      <div class="text-sm text-gray-500 dark:text-gray-400 space-x-2">
+        <time datetime={post.data.publishedAt.toISOString()}>
+          {formattedDate}
+        </time>
+        {formattedUpdatedAt && (
+          <>
+            <span>|</span>
+            <span>
+              更新: <time datetime={post.data.updatedAt!.toISOString()}>{formattedUpdatedAt}</time>
+            </span>
+          </>
+        )}
+      </div>
       <h1 class="mt-2 text-3xl font-bold sm:text-4xl">
         {post.data.title}
       </h1>
