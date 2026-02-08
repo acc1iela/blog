@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import rehypeExternalLinks from 'rehype-external-links';
-import remarkYoutube from './src/plugins/remark-youtube.mjs';
+import remarkYoutube from './src/plugins/remark-youtube';
 
 export default defineConfig({
   integrations: [
