@@ -22,7 +22,7 @@
   }
 
   .prose table {
-    @apply block overflow-x-auto whitespace-nowrap;
+    @apply block overflow-x-auto;
   }
 
   .prose code {
