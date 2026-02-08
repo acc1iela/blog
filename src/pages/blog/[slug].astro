@@ -4,14 +4,20 @@ import TableOfContents from '@/components/TableOfContents.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+  return posts.map((post, index) => ({
     params: { slug: post.id },
-    props: { post },
+    props: {
+      post,
+      prevPost: posts[index + 1] ?? null, // 古い記事
+      nextPost: posts[index - 1] ?? null, // 新しい記事
+    },
   }));
 }
 
-const { post } = Astro.props;
+const { post, prevPost, nextPost } = Astro.props;
 const { Content, headings } = await post.render();
 
 const dateOptions: Intl.DateTimeFormatOptions = {
@@ -68,5 +74,39 @@ const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', date
         </aside>
       )}
     </div>
+
+    <!-- 前後記事ナビ -->
+    {(prevPost || nextPost) && (
+      <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div class="flex justify-between gap-4">
+          {prevPost ? (
+            <a
+              href={`/blog/${prevPost.id}/`}
+              class="group flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors"
+            >
+              <span class="text-sm text-gray-500 dark:text-gray-400">← 前の記事</span>
+              <p class="mt-1 font-medium group-hover:text-accent transition-colors line-clamp-2">
+                {prevPost.data.title}
+              </p>
+            </a>
+          ) : (
+            <div class="flex-1" />
+          )}
+          {nextPost ? (
+            <a
+              href={`/blog/${nextPost.id}/`}
+              class="group flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors text-right"
+            >
+              <span class="text-sm text-gray-500 dark:text-gray-400">次の記事 →</span>
+              <p class="mt-1 font-medium group-hover:text-accent transition-colors line-clamp-2">
+                {nextPost.data.title}
+              </p>
+            </a>
+          ) : (
+            <div class="flex-1" />
+          )}
+        </div>
+      </nav>
+    )}
   </article>
 </BaseLayout>
