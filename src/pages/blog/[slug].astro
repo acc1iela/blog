@@ -21,7 +21,7 @@ const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', {
 });
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={post.data.title} description={post.data.description} ogType="article">
   <article class="py-8">
     <header class="mb-8 text-center">
       <time class="text-sm text-gray-500 dark:text-gray-400">

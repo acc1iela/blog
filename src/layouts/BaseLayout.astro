@@ -6,9 +6,20 @@ import '@/styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
 }
 
-const { title, description = 'Accioの技術ブログ' } = Astro.props;
+const {
+  title,
+  description = 'Accioの技術ブログ',
+  ogType = 'website',
+  ogImage,
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const fullTitle = `${title} | Accio Blog`;
 ---
 
 <!doctype html>
@@ -18,7 +29,22 @@ const { title, description = 'Accioの技術ブログ' } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title} | Accio Blog</title>
+    <link rel="canonical" href={canonicalUrl} />
+    <title>{fullTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Accio Blog" />
+    <meta property="og:locale" content="ja_JP" />
+    {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
     <script is:inline>
       const theme = localStorage.getItem('theme') ||
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
