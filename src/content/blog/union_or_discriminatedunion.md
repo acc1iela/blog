@@ -138,7 +138,7 @@ type UIState = {
 // isLoading: true, isError: true みたいな矛盾した状態が作れてしまう
 ```
 
-これを判別可能ユニオンで定義すれば、状態は常に一つであることが保証される。
+これを判別可能ユニオンで定義すれば、状態は常に一つであることが保証されます。
 
 ```typescript
 // ✅ 良い例：状態をユニオンで定義
@@ -196,7 +196,7 @@ function processPayment(payment: PaymentMethod) {
 ## 深掘り：Optional Property (`?`) の危険性
 
 TypeScript初心者がやりがちなのがとりあえず`?`をつけてOptional Propertyにしてしまうことです。
-これは多くの場合**「あり得ない状態」**を生み出す温床になります。
+これは多くの場合「あり得ない状態」を生み出す温床になります。s
 
 ### なぜ `?` は危険なのか
 
@@ -214,7 +214,7 @@ type UserSettings = {
 この定義では、以下のバグを許容してしまいます。
 
 1. `notificationsEnabled: true` なのに `notificationEmail` が `undefined` になる
-2. `notificationsEnabled: false` なのに `notificationEmail` が入っている（これはバグではないかもしれないが、データの整合性としては不自然だと思います）
+2. `notificationsEnabled: false` なのに `notificationEmail` が入っている（これはバグではないかもしれないですが、データの整合性としては不自然だと思います）
 
 ### ユニオン型による解決
 
@@ -372,7 +372,7 @@ export async function submitForm(prevState: ActionState, formData: FormData): Pr
 
 ## 応用：網羅性チェック（Exhaustiveness Checking）
 
-判別可能ユニオンと `switch` 文を組み合わせる際、  **「全てのパターンを網羅しているか」** をコンパイラにチェックさせることができます。
+判別可能ユニオンと `switch` 文を組み合わせる際、 **「全てのパターンを網羅しているか」** をコンパイラにチェックさせることができます。
 これには `never` 型を利用しましょう。
 
 ```typescript
