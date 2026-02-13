@@ -26,7 +26,7 @@ const postsData = sortedPosts.map((post) => ({
     <h1 class="text-3xl font-bold mb-8">Blog</h1>
 
     <div class="space-y-6 mb-8">
-      <SearchBox client:load posts={postsData} />
+      <SearchBox client:idle posts={postsData} />
       <TagList tags={allTags} />
     </div>
 
