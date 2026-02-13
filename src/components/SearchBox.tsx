@@ -36,9 +36,13 @@ export default function SearchBox({ posts }: Props) {
       <div className="relative">
         <input
           type="text"
+          id="search-box"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="記事を検索..."
+          aria-label="ブログ記事を検索"
+          aria-autocomplete="list"
+          aria-controls={filteredPosts !== null ? 'search-results' : undefined}
           className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
         />
         <svg
@@ -46,6 +50,7 @@ export default function SearchBox({ posts }: Props) {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -57,9 +62,14 @@ export default function SearchBox({ posts }: Props) {
       </div>
 
       {filteredPosts !== null && (
-        <div className="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-96 overflow-y-auto">
+        <div
+          id="search-results"
+          role="listbox"
+          aria-live="polite"
+          className="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-96 overflow-y-auto"
+        >
           {filteredPosts.length > 0 ? (
-            <ul>
+            <ul role="group">
               {filteredPosts.map((post) => (
                 <li key={post.slug}>
                   <a
