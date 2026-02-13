@@ -73,7 +73,7 @@ export default function SearchBox({ posts }: Props) {
               {filteredPosts.map((post) => (
                 <li key={post.slug}>
                   <a
-                    href={`/blog/${post.slug}`}
+                    href={`/blog/${post.slug}/`}
                     className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
                   >
                     <p className="font-medium">{post.title}</p>
