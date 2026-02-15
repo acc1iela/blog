@@ -18,19 +18,23 @@ const currentPath = Astro.url.pathname;
       </a>
 
       <nav class="flex items-center gap-6">
-        {navItems.map(({ href, label }) => (
-          <a
-            href={href}
-            class:list={[
-              'text-sm font-medium transition-colors',
-              currentPath === href || (href !== '/' && currentPath.startsWith(href))
-                ? 'text-accent'
-                : 'text-gray-600 dark:text-gray-300 hover:text-accent',
-            ]}
-          >
-            {label}
-          </a>
-        ))}
+        {navItems.map(({ href, label }) => {
+          const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+          return (
+            <a
+              href={href}
+              aria-current={isActive ? 'page' : undefined}
+              class:list={[
+                'text-sm font-medium transition-colors',
+                isActive
+                  ? 'text-accent'
+                  : 'text-gray-600 dark:text-gray-300 hover:text-accent',
+              ]}
+            >
+              {label}
+            </a>
+          );
+        })}
         <ThemeToggle client:idle />
       </nav>
     </div>
