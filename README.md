@@ -9,22 +9,6 @@ Astro製の個人ブログ。
 - Tailwind CSS
 - MDX
 
-## Getting Started
-
-```bash
-# インストール
-npm install
-
-# 開発サーバー起動
-npm run dev
-
-# ビルド
-npm run build
-
-# プレビュー
-npm run preview
-```
-
 ## 構成
 
 ```
