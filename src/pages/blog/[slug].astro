@@ -4,8 +4,9 @@ import TableOfContents from '@/components/TableOfContents.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog', ({ data }) => !data.draft))
-    .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+  );
 
   return posts.map((post, index) => ({
     params: { slug: post.id },
@@ -30,83 +31,100 @@ const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', dateOpti
 const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', dateOptions);
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} ogType="article" ogImage={post.data.ogImage}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+  ogImage={post.data.ogImage}
+>
   <article class="py-8">
     <header class="mb-8 text-center">
-      <div class="text-sm text-gray-500 dark:text-gray-400 space-x-2">
+      <div class="space-x-2 text-sm text-gray-500 dark:text-gray-400">
         <time datetime={post.data.publishedAt.toISOString()}>
           {formattedDate}
         </time>
-        {formattedUpdatedAt && (
-          <>
-            <span>|</span>
-            <span>
-              更新: <time datetime={post.data.updatedAt!.toISOString()}>{formattedUpdatedAt}</time>
-            </span>
-          </>
-        )}
+        {
+          formattedUpdatedAt && (
+            <>
+              <span>|</span>
+              <span>
+                更新:{' '}
+                <time datetime={post.data.updatedAt!.toISOString()}>{formattedUpdatedAt}</time>
+              </span>
+            </>
+          )
+        }
       </div>
       <h1 class="mt-2 text-3xl font-bold sm:text-4xl">
         {post.data.title}
       </h1>
-      <div class="mt-4 flex justify-center flex-wrap gap-2">
-        {post.data.tags.map((tag) => (
-          <a
-            href={`/blog/tag/${tag}`}
-            class="px-3 py-1 text-sm rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-accent hover:text-white transition-colors"
-          >
-            {tag}
-          </a>
-        ))}
+      <div class="mt-4 flex flex-wrap justify-center gap-2">
+        {
+          post.data.tags.map((tag) => (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-600 transition-colors hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300"
+            >
+              {tag}
+            </a>
+          ))
+        }
       </div>
     </header>
 
     <div class="lg:grid lg:grid-cols-[1fr_200px] lg:gap-8">
-      <div class="prose prose-lg dark:prose-invert max-w-none min-w-0">
+      <div class="prose prose-lg min-w-0 max-w-none dark:prose-invert">
         <Content />
       </div>
 
-      {headings.length > 0 && (
-        <aside class="hidden lg:block">
-          <div class="sticky top-24">
-            <TableOfContents headings={headings} />
-          </div>
-        </aside>
-      )}
+      {
+        headings.length > 0 && (
+          <aside class="hidden lg:block">
+            <div class="sticky top-24">
+              <TableOfContents headings={headings} />
+            </div>
+          </aside>
+        )
+      }
     </div>
 
     <!-- 前後記事ナビ -->
-    {(prevPost || nextPost) && (
-      <nav aria-label="前後記事ナビゲーション" class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
-        <div class="flex justify-between gap-4">
-          {prevPost ? (
-            <a
-              href={`/blog/${prevPost.id}/`}
-              class="group flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors"
-            >
-              <span class="text-sm text-gray-500 dark:text-gray-400">← 前の記事</span>
-              <p class="mt-1 font-medium group-hover:text-accent transition-colors line-clamp-2">
-                {prevPost.data.title}
-              </p>
-            </a>
-          ) : (
-            <div class="flex-1" />
-          )}
-          {nextPost ? (
-            <a
-              href={`/blog/${nextPost.id}/`}
-              class="group flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors text-right"
-            >
-              <span class="text-sm text-gray-500 dark:text-gray-400">次の記事 →</span>
-              <p class="mt-1 font-medium group-hover:text-accent transition-colors line-clamp-2">
-                {nextPost.data.title}
-              </p>
-            </a>
-          ) : (
-            <div class="flex-1" />
-          )}
-        </div>
-      </nav>
-    )}
+    {
+      (prevPost || nextPost) && (
+        <nav
+          aria-label="前後記事ナビゲーション"
+          class="mt-12 border-t border-gray-200 pt-8 dark:border-gray-700"
+        >
+          <div class="flex justify-between gap-4">
+            {prevPost ? (
+              <a
+                href={`/blog/${prevPost.id}/`}
+                class="group flex-1 rounded-lg border border-gray-200 p-4 transition-colors hover:border-accent dark:border-gray-700 dark:hover:border-accent"
+              >
+                <span class="text-sm text-gray-500 dark:text-gray-400">← 前の記事</span>
+                <p class="mt-1 line-clamp-2 font-medium transition-colors group-hover:text-accent">
+                  {prevPost.data.title}
+                </p>
+              </a>
+            ) : (
+              <div class="flex-1" />
+            )}
+            {nextPost ? (
+              <a
+                href={`/blog/${nextPost.id}/`}
+                class="group flex-1 rounded-lg border border-gray-200 p-4 text-right transition-colors hover:border-accent dark:border-gray-700 dark:hover:border-accent"
+              >
+                <span class="text-sm text-gray-500 dark:text-gray-400">次の記事 →</span>
+                <p class="mt-1 line-clamp-2 font-medium transition-colors group-hover:text-accent">
+                  {nextPost.data.title}
+                </p>
+              </a>
+            ) : (
+              <div class="flex-1" />
+            )}
+          </div>
+        </nav>
+      )
+    }
   </article>
 </BaseLayout>

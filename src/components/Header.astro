@@ -10,31 +10,33 @@ const navItems = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center h-16">
-      <a href="/" class="text-xl font-bold hover:opacity-80 transition-opacity">
+<header
+  class="sticky top-0 z-50 border-b border-gray-200 bg-white/80 backdrop-blur-sm dark:border-gray-700 dark:bg-gray-900/80"
+>
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <a href="/" class="text-xl font-bold transition-opacity hover:opacity-80">
         Accio <span class="text-accent">Blog</span>
       </a>
 
       <nav class="flex items-center gap-6">
-        {navItems.map(({ href, label }) => {
-          const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
-          return (
-            <a
-              href={href}
-              aria-current={isActive ? 'page' : undefined}
-              class:list={[
-                'text-sm font-medium transition-colors',
-                isActive
-                  ? 'text-accent'
-                  : 'text-gray-600 dark:text-gray-300 hover:text-accent',
-              ]}
-            >
-              {label}
-            </a>
-          );
-        })}
+        {
+          navItems.map(({ href, label }) => {
+            const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+            return (
+              <a
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                class:list={[
+                  'text-sm font-medium transition-colors',
+                  isActive ? 'text-accent' : 'text-gray-600 hover:text-accent dark:text-gray-300',
+                ]}
+              >
+                {label}
+              </a>
+            );
+          })
+        }
         <ThemeToggle client:idle />
       </nav>
     </div>

@@ -5,45 +5,43 @@ const skills = [
   { category: 'Languages', items: ['TypeScript', 'JavaScript', 'HTML', 'CSS'] },
   { category: 'Frameworks', items: ['React', 'Next.js', 'Astro', 'Tailwind CSS'] },
   { category: 'Tools', items: ['Git', 'Cursor', 'Figma'] },
-]
-
+];
 ---
 
 <BaseLayout title="About" description="Accioについて">
   <section class="py-8">
-    <h1 class="text-3xl font-bold mb-8">About</h1>
+    <h1 class="mb-8 text-3xl font-bold">About</h1>
 
-    <div class="prose prose-lg dark:prose-invert max-w-none mb-12">
-      <p>
-        名古屋でフロントエンドエンジニアをやってます。
-      </p>
+    <div class="prose prose-lg mb-12 max-w-none dark:prose-invert">
+      <p>名古屋でフロントエンドエンジニアをやってます。</p>
       <p>
         フロントエンドは全般的に好きですがまだまだ勉強中
         このブログでは自分が詰まったところや勉強してて分かりづらかったことを同じところで悩む誰かの役に立てばいいなと思って書いてます。
       </p>
       <p>
-        仕事以外ではゲームしたり筋トレしたり本読んだりしてます。
-        スト６弱いけど頑張ってます。
+        仕事以外ではゲームしたり筋トレしたり本読んだりしてます。 スト６弱いけど頑張ってます。
         ラシード使いです、優しくしてください。
       </p>
     </div>
 
-    <h2 class="text-2xl font-bold mb-6">Skills</h2>
+    <h2 class="mb-6 text-2xl font-bold">Skills</h2>
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      {skills.map(({ category, items }) => (
-        <div class="p-6 rounded-xl border border-gray-200 dark:border-gray-700">
-          <h3 class="font-bold text-accent mb-4">{category}</h3>
-          <ul class="space-y-2">
-            {items.map((item) => (
-              <li class="text-gray-600 dark:text-gray-300">{item}</li>
-            ))}
-          </ul>
-        </div>
-      ))}
+      {
+        skills.map(({ category, items }) => (
+          <div class="rounded-xl border border-gray-200 p-6 dark:border-gray-700">
+            <h3 class="mb-4 font-bold text-accent">{category}</h3>
+            <ul class="space-y-2">
+              {items.map((item) => (
+                <li class="text-gray-600 dark:text-gray-300">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
 
     <div class="mt-12">
-      <h2 class="text-2xl font-bold mb-6">Contact</h2>
+      <h2 class="mb-6 text-2xl font-bold">Contact</h2>
       <p class="text-gray-600 dark:text-gray-300">
         お問い合わせは
         <a

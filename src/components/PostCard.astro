@@ -16,23 +16,27 @@ const formattedDate = publishedAt.toLocaleDateString('ja-JP', {
 });
 ---
 
-<article class="group p-6 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-accent dark:hover:border-accent transition-colors">
+<article
+  class="group rounded-xl border border-gray-200 p-6 transition-colors hover:border-accent dark:border-gray-700 dark:hover:border-accent"
+>
   <a href={`/blog/${slug}/`} class="block">
     <time class="text-sm text-gray-500 dark:text-gray-400">
       {formattedDate}
     </time>
-    <h3 class="mt-2 text-xl font-bold group-hover:text-accent transition-colors">
+    <h3 class="mt-2 text-xl font-bold transition-colors group-hover:text-accent">
       {title}
     </h3>
-    <p class="mt-2 text-gray-600 dark:text-gray-300 line-clamp-2">
+    <p class="mt-2 line-clamp-2 text-gray-600 dark:text-gray-300">
       {description}
     </p>
     <div class="mt-4 flex flex-wrap gap-2">
-      {tags.map((tag) => (
-        <span class="px-2 py-1 text-xs rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-          {tag}
-        </span>
-      ))}
+      {
+        tags.map((tag) => (
+          <span class="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-300">
+            {tag}
+          </span>
+        ))
+      }
     </div>
   </a>
 </article>

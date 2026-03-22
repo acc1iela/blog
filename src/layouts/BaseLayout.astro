@@ -10,12 +10,7 @@ interface Props {
   ogImage?: string;
 }
 
-const {
-  title,
-  description = 'Accioの技術ブログ',
-  ogType = 'website',
-  ogImage,
-} = Astro.props;
+const { title, description = 'Accioの技術ブログ', ogType = 'website', ogImage } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
@@ -57,9 +52,9 @@ const fullTitle = `${title} | Accio Blog`;
       document.documentElement.classList.toggle('dark', theme === 'dark');
     </script>
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="flex min-h-screen flex-col">
     <Header />
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="mx-auto w-full max-w-4xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
       <slot />
     </main>
     <Footer />

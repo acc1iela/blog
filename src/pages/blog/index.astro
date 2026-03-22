@@ -23,29 +23,31 @@ const postsData = sortedPosts.map((post) => ({
 
 <BaseLayout title="Blog" description="技術記事の一覧">
   <section class="py-8">
-    <h1 class="text-3xl font-bold mb-8">Blog</h1>
+    <h1 class="mb-8 text-3xl font-bold">Blog</h1>
 
-    <div class="space-y-6 mb-8">
+    <div class="mb-8 space-y-6">
       <SearchBox client:idle posts={postsData} />
       <TagList tags={allTags} />
     </div>
 
     <div id="posts-container" class="grid gap-6 sm:grid-cols-2">
-      {sortedPosts.map((post) => (
-        <PostCard
-          title={post.data.title}
-          description={post.data.description}
-          tags={post.data.tags}
-          publishedAt={post.data.publishedAt}
-          slug={post.id}
-        />
-      ))}
+      {
+        sortedPosts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            description={post.data.description}
+            tags={post.data.tags}
+            publishedAt={post.data.publishedAt}
+            slug={post.id}
+          />
+        ))
+      }
     </div>
 
-    {sortedPosts.length === 0 && (
-      <p class="text-gray-500 dark:text-gray-400 text-center py-12">
-        まだ記事がありません。
-      </p>
-    )}
+    {
+      sortedPosts.length === 0 && (
+        <p class="py-12 text-center text-gray-500 dark:text-gray-400">まだ記事がありません。</p>
+      )
+    }
   </section>
 </BaseLayout>

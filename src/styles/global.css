@@ -11,7 +11,7 @@
 
 @layer components {
   .link-hover {
-    @apply text-accent hover:text-accent-dark dark:hover:text-accent-light transition-colors;
+    @apply text-accent transition-colors hover:text-accent-dark dark:hover:text-accent-light;
   }
 }
 
@@ -32,10 +32,10 @@
 
 /* YouTube埋め込み */
 .youtube-embed {
-  @apply relative w-full my-6;
+  @apply relative my-6 w-full;
   aspect-ratio: 16 / 9;
 }
 
 .youtube-embed iframe {
-  @apply absolute top-0 left-0 w-full h-full rounded-lg border-0;
+  @apply absolute left-0 top-0 h-full w-full rounded-lg border-0;
 }

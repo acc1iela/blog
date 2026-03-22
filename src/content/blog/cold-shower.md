@@ -123,6 +123,7 @@ https://www.youtube.com/watch?v=9zrMT22mzB4
 もし5分以内に体の奥底の冷たさが消えなければ、それは**浴びすぎ**の可能性が高いです。
 
 対策：
+
 - 時間を短くする
 - 水圧を下げる（同じ水温でも水圧で体感はかなり変わる）
 
@@ -156,5 +157,6 @@ https://www.youtube.com/watch?v=9zrMT22mzB4
 ---
 
 参考：
+
 - [The Science & Use of Cold Exposure for Health & Performance - Huberman Lab](https://www.hubermanlab.com/newsletter/the-science-and-use-of-cold-exposure-for-health-and-performance)
 - [Using Deliberate Cold Exposure for Health and Performance - Huberman Lab](https://www.hubermanlab.com/episode/using-deliberate-cold-exposure-for-health-and-performance)

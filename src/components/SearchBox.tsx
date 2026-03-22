@@ -46,10 +46,10 @@ export default function SearchBox({ posts }: Props) {
           aria-label="ブログ記事を検索"
           aria-autocomplete="list"
           aria-controls={filteredPosts !== null ? 'search-results' : undefined}
-          className="w-full px-4 py-2 pl-10 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+          className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent dark:border-gray-600 dark:bg-gray-800"
         />
         <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+          className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -68,7 +68,7 @@ export default function SearchBox({ posts }: Props) {
         <div
           id="search-results"
           aria-live="polite"
-          className="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-96 overflow-y-auto"
+          className="absolute z-10 mt-2 max-h-96 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
         >
           {filteredPosts.length > 0 ? (
             <ul>
@@ -76,10 +76,10 @@ export default function SearchBox({ posts }: Props) {
                 <li key={post.slug}>
                   <a
                     href={`/blog/${post.slug}/`}
-                    className="block px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                    className="block px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                   >
                     <p className="font-medium">{post.title}</p>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
                       {formatDate(post.publishedAt)}
                     </p>
                   </a>

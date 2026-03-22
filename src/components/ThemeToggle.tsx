@@ -19,17 +19,17 @@ export default function ThemeToggle() {
 
   // 初期レンダリング中はプレースホルダーを表示（フラッシュ防止）
   if (theme === null) {
-    return <div className="w-9 h-9" aria-hidden="true" />;
+    return <div className="h-9 w-9" aria-hidden="true" />;
   }
 
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:focus:ring-offset-gray-900 transition-colors"
+      className="rounded-lg p-2 transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 dark:hover:bg-gray-800 dark:focus:ring-offset-gray-900"
       aria-label={theme === 'light' ? 'ダークモードに切り替え' : 'ライトモードに切り替え'}
     >
       {theme === 'light' ? (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -38,7 +38,7 @@ export default function ThemeToggle() {
           />
         </svg>
       ) : (
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
