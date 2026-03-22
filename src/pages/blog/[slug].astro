@@ -77,7 +77,7 @@ const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', date
 
     <!-- 前後記事ナビ -->
     {(prevPost || nextPost) && (
-      <nav class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <nav aria-label="前後記事ナビゲーション" class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
         <div class="flex justify-between gap-4">
           {prevPost ? (
             <a
