@@ -51,7 +51,9 @@ const fullTitle = `${title} | Accio Blog`;
         theme =
           localStorage.getItem('theme') ||
           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      } catch (_) {}
+      } catch {
+        // storage unavailable (e.g. private browsing, Safari ITP)
+      }
       document.documentElement.classList.toggle('dark', theme === 'dark');
     </script>
   </head>
