@@ -37,5 +37,5 @@
 }
 
 .youtube-embed iframe {
-  @apply absolute top-0 left-0 w-full h-full rounded-lg;
+  @apply absolute top-0 left-0 w-full h-full rounded-lg border-0;
 }
