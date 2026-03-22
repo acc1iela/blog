@@ -18,8 +18,11 @@ export default function SearchBox({ posts }: Props) {
   const filteredPosts = useMemo(() => {
     if (!query.trim()) return null;
     const lowerQuery = query.toLowerCase();
-    return posts.filter((post) =>
-      post.title.toLowerCase().includes(lowerQuery)
+    return posts.filter(
+      (post) =>
+        post.title.toLowerCase().includes(lowerQuery) ||
+        post.description.toLowerCase().includes(lowerQuery) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
     );
   }, [query, posts]);
 
