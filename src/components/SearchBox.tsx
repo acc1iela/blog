@@ -64,12 +64,11 @@ export default function SearchBox({ posts }: Props) {
       {filteredPosts !== null && (
         <div
           id="search-results"
-          role="listbox"
           aria-live="polite"
           className="absolute z-10 w-full mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-96 overflow-y-auto"
         >
           {filteredPosts.length > 0 ? (
-            <ul role="group">
+            <ul>
               {filteredPosts.map((post) => (
                 <li key={post.slug}>
                   <a
