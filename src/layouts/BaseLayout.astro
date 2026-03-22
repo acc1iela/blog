@@ -46,8 +46,12 @@ const fullTitle = `${title} | Accio Blog`;
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <script is:inline>
-      const theme = localStorage.getItem('theme') ||
-        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      let theme = 'light';
+      try {
+        theme =
+          localStorage.getItem('theme') ||
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      } catch (_) {}
       document.documentElement.classList.toggle('dark', theme === 'dark');
     </script>
   </head>
