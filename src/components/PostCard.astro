@@ -29,14 +29,17 @@ const formattedDate = publishedAt.toLocaleDateString('ja-JP', {
     <p class="mt-2 line-clamp-2 text-gray-600 dark:text-gray-300">
       {description}
     </p>
-    <div class="mt-4 flex flex-wrap gap-2">
-      {
-        tags.map((tag) => (
-          <span class="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600 dark:bg-gray-800 dark:text-gray-300">
-            {tag}
-          </span>
-        ))
-      }
-    </div>
   </a>
+  <div class="mt-4 flex flex-wrap gap-2">
+    {
+      tags.map((tag) => (
+        <a
+          href={`/blog/tag/${tag}`}
+          class="rounded-full bg-gray-100 px-2 py-1 text-xs text-gray-600 transition-colors hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300"
+        >
+          {tag}
+        </a>
+      ))
+    }
+  </div>
 </article>
