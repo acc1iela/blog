@@ -17,6 +17,12 @@ export default defineConfig({
   ],
   site: 'https://acc1iela-blog.dev',
   markdown: {
+    shikiConfig: {
+      themes: {
+        light: 'github-light',
+        dark: 'github-dark',
+      },
+    },
     remarkPlugins: [remarkYoutube],
     rehypePlugins: [
       [

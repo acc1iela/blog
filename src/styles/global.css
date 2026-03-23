@@ -30,6 +30,19 @@
   }
 }
 
+/* Shiki dual theme: class-based dark mode への対応 */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light) !important;
+  background-color: var(--shiki-light-bg) !important;
+}
+
+.dark .astro-code,
+.dark .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+
 /* YouTube埋め込み */
 .youtube-embed {
   @apply relative my-6 w-full;
