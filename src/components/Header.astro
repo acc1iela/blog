@@ -19,7 +19,7 @@ const currentPath = Astro.url.pathname;
         Accio <span class="text-accent">Blog</span>
       </a>
 
-      <nav class="flex items-center gap-6">
+      <nav aria-label="メインナビゲーション" class="flex items-center gap-6">
         {
           navItems.map(({ href, label }) => {
             const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
