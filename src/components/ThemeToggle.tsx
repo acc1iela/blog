@@ -13,7 +13,11 @@ export default function ThemeToggle() {
   const toggleTheme = useCallback(() => {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
+    try {
+      localStorage.setItem('theme', newTheme);
+    } catch {
+      // storage unavailable (e.g. private browsing, Safari ITP)
+    }
     document.documentElement.classList.toggle('dark', newTheme === 'dark');
   }, [theme]);
 
