@@ -11,15 +11,17 @@ export default function ThemeToggle() {
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    try {
-      localStorage.setItem('theme', newTheme);
-    } catch {
-      // storage unavailable (e.g. private browsing, Safari ITP)
-    }
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  }, [theme]);
+    setTheme((prev) => {
+      const newTheme = prev === 'light' ? 'dark' : 'light';
+      try {
+        localStorage.setItem('theme', newTheme);
+      } catch {
+        // storage unavailable (e.g. private browsing, Safari ITP)
+      }
+      document.documentElement.classList.toggle('dark', newTheme === 'dark');
+      return newTheme;
+    });
+  }, []);
 
   // 初期レンダリング中はプレースホルダーを表示（フラッシュ防止）
   if (theme === null) {
