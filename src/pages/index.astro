@@ -51,7 +51,7 @@ const recentPosts = allPosts
               description={post.data.description}
               tags={post.data.tags}
               publishedAt={post.data.publishedAt}
-              slug={post.id}
+              slug={post.id.replace(/\.mdx?$/, '')}
             />
           ))}
         </div>

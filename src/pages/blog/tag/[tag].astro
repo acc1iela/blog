@@ -49,7 +49,7 @@ const { posts, allTags } = Astro.props;
             description={post.data.description}
             tags={post.data.tags}
             publishedAt={post.data.publishedAt}
-            slug={post.id}
+            slug={post.id.replace(/\.mdx?$/, '')}
           />
         ))
       }

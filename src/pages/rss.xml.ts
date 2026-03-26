@@ -15,7 +15,7 @@ export async function GET(context: APIContext) {
         title: post.data.title,
         pubDate: post.data.publishedAt,
         description: post.data.description,
-        link: `/blog/${post.id}/`,
+        link: `/blog/${post.id.replace(/\.mdx?$/, '')}/`,
         categories: post.data.tags,
       })),
   });
