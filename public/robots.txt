@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acc1iela-blog.dev/sitemap-index.xml
