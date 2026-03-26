@@ -29,6 +29,20 @@ const dateOptions: Intl.DateTimeFormatOptions = {
 
 const formattedDate = post.data.publishedAt.toLocaleDateString('ja-JP', dateOptions);
 const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', dateOptions);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.publishedAt.toISOString(),
+  ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
+  url: canonicalUrl,
+  author: { '@type': 'Person', name: 'Accio' },
+  ...(post.data.ogImage && { image: `${siteUrl}${post.data.ogImage}` }),
+};
 ---
 
 <BaseLayout
@@ -37,6 +51,7 @@ const formattedUpdatedAt = post.data.updatedAt?.toLocaleDateString('ja-JP', date
   ogType="article"
   ogImage={post.data.ogImage}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article class="py-8">
     <header class="mb-8 text-center">
       <div class="space-x-2 text-sm text-gray-500 dark:text-gray-400">
