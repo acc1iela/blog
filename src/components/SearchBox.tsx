@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 
 interface Post {
   title: string;
@@ -26,6 +26,10 @@ export default function SearchBox({ posts }: Props) {
     );
   }, [query, posts]);
 
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Escape') setQuery('');
+  }, []);
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('ja-JP', {
       year: 'numeric',
@@ -45,7 +49,9 @@ export default function SearchBox({ posts }: Props) {
           placeholder="記事を検索..."
           aria-label="ブログ記事を検索"
           aria-autocomplete="list"
+          aria-expanded={filteredPosts !== null}
           aria-controls={filteredPosts !== null ? 'search-results' : undefined}
+          onKeyDown={handleKeyDown}
           className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent dark:border-gray-600 dark:bg-gray-800"
         />
         <svg
