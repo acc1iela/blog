@@ -34,10 +34,10 @@ const fullTitle = `${title} | Accio Blog`;
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Accio Blog" />
     <meta property="og:locale" content="ja_JP" />
-    {ogImage && <meta property="og:image" content={`${siteUrl}${ogImage}`} />}
+    <meta property="og:image" content={ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og-default.png`} />
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <slot name="head" />
