@@ -40,6 +40,7 @@ const fullTitle = `${title} | Accio Blog`;
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og-default.png`} />
     <slot name="head" />
     <script is:inline>
       let theme = 'light';
