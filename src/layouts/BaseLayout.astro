@@ -8,12 +8,13 @@ interface Props {
   description?: string;
   ogType?: 'website' | 'article';
   ogImage?: string;
+  canonicalUrl?: string;
 }
 
-const { title, description = 'Accioの技術ブログ', ogType = 'website', ogImage } = Astro.props;
+const { title, description = 'Accioの技術ブログ', ogType = 'website', ogImage, canonicalUrl: canonicalUrlProp } = Astro.props;
 
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const canonicalUrl = canonicalUrlProp ?? new URL(Astro.url.pathname, Astro.site).toString();
 const fullTitle = `${title} | Accio Blog`;
 ---
 

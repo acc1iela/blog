@@ -50,6 +50,7 @@ const jsonLd = {
   description={post.data.description}
   ogType="article"
   ogImage={post.data.ogImage}
+  canonicalUrl={canonicalUrl}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <article class="py-8">
