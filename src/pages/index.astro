@@ -6,9 +6,20 @@ import { sortByDate, getSlug } from '@/utils/posts';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const recentPosts = sortByDate(allPosts).slice(0, 3);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Accio Blog',
+  url: siteUrl,
+  description: 'Accioの技術ブログ',
+  author: { '@type': 'Person', name: 'Accio' },
+};
 ---
 
 <BaseLayout title="Home">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="py-12">
     <div class="max-w-2xl">
       <h1 class="text-4xl font-bold sm:text-5xl">
