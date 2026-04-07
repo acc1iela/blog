@@ -2,11 +2,10 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PostCard from '@/components/PostCard.astro';
 import { getCollection } from 'astro:content';
+import { sortByDate, getSlug } from '@/utils/posts';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-const recentPosts = allPosts
-  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-  .slice(0, 3);
+const recentPosts = sortByDate(allPosts).slice(0, 3);
 ---
 
 <BaseLayout title="Home">
@@ -51,7 +50,7 @@ const recentPosts = allPosts
               description={post.data.description}
               tags={post.data.tags}
               publishedAt={post.data.publishedAt}
-              slug={post.id.replace(/\.mdx?$/, '')}
+              slug={getSlug(post)}
             />
           ))}
         </div>
