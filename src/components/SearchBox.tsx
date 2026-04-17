@@ -44,12 +44,14 @@ export default function SearchBox({ posts }: Props) {
         <input
           type="text"
           id="search-box"
+          role="combobox"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="記事を検索..."
           aria-label="ブログ記事を検索"
           aria-autocomplete="list"
           aria-expanded={filteredPosts !== null}
+          aria-haspopup="listbox"
           aria-controls={filteredPosts !== null ? 'search-results' : undefined}
           onKeyDown={handleKeyDown}
           className="w-full rounded-lg border border-gray-300 bg-white px-4 py-2 pl-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-accent dark:border-gray-600 dark:bg-gray-800"
@@ -73,13 +75,14 @@ export default function SearchBox({ posts }: Props) {
       {filteredPosts !== null && (
         <div
           id="search-results"
+          role="listbox"
           aria-live="polite"
           className="absolute z-10 mt-2 max-h-96 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-800"
         >
           {filteredPosts.length > 0 ? (
             <ul>
               {filteredPosts.map((post) => (
-                <li key={post.slug}>
+                <li key={post.slug} role="option" aria-selected={false}>
                   <a
                     href={`/blog/${post.slug}/`}
                     className="block px-4 py-3 transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
