@@ -39,7 +39,7 @@ const jsonLd = {
   datePublished: post.data.publishedAt.toISOString(),
   ...(post.data.updatedAt && { dateModified: post.data.updatedAt.toISOString() }),
   url: canonicalUrl,
-  author: { '@type': 'Person', name: 'Accio' },
+  author: { '@type': 'Person', name: 'Accio', url: 'https://github.com/acc1iela' },
   ...(post.data.ogImage && { image: `${siteUrl}${post.data.ogImage}` }),
 };
 ---
