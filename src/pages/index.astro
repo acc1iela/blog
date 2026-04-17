@@ -14,11 +14,11 @@ const jsonLd = {
   name: 'Accio Blog',
   url: siteUrl,
   description: 'Accioの技術ブログ',
-  author: { '@type': 'Person', name: 'Accio' },
+  author: { '@type': 'Person', name: 'Accio', url: 'https://github.com/acc1iela' },
 };
 ---
 
-<BaseLayout title="Home">
+<BaseLayout title="フロントエンド技術ブログ">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <section class="py-12">
     <div class="max-w-2xl">
