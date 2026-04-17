@@ -9,6 +9,7 @@ export async function GET(context: APIContext) {
     title: 'Accio Blog',
     description: 'Accioの技術ブログ',
     site: context.site!,
+    customData: '<managingEditor>acc1iela@gmail.com (Accio)</managingEditor>',
     items: posts
       .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
       .map((post) => ({
@@ -17,6 +18,7 @@ export async function GET(context: APIContext) {
         description: post.data.description,
         link: `/blog/${post.id.replace(/\.mdx?$/, '')}/`,
         categories: post.data.tags,
+        customData: '<author>acc1iela@gmail.com (Accio)</author>',
       })),
   });
 }
