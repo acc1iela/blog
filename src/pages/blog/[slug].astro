@@ -42,6 +42,15 @@ const jsonLd = {
   author: { '@type': 'Person', name: 'Accio', url: 'https://github.com/acc1iela' },
   ...(post.data.ogImage && { image: `${siteUrl}${post.data.ogImage}` }),
 };
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}/blog/` },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: canonicalUrl },
+  ],
+};
 ---
 
 <BaseLayout
@@ -52,6 +61,7 @@ const jsonLd = {
   canonicalUrl={canonicalUrl}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
   <article class="py-8">
     <header class="mb-8 text-center">
       <div class="space-x-2 text-sm text-gray-500 dark:text-gray-400">
