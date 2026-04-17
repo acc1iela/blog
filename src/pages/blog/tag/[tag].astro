@@ -25,9 +25,25 @@ interface Props {
 
 const { tag } = Astro.params;
 const { posts, allTags } = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).toString();
+const collectionLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: `${tag}の記事`,
+  description: `${tag}に関する記事一覧`,
+  url: canonicalUrl,
+  hasPart: posts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    url: `${siteUrl}/blog/${getSlug(post)}/`,
+  })),
+};
 ---
 
 <BaseLayout title={`${tag}の記事`} description={`${tag}に関する記事一覧`}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(collectionLd)} />
   <section class="py-8">
     <h1 class="mb-2 text-3xl font-bold">
       <span class="text-accent">#{tag}</span> の記事
