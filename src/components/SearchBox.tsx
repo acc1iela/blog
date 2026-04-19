@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { Component, useState, useMemo, useCallback, type ReactNode } from 'react';
 
 interface Post {
   title: string;
@@ -12,7 +12,29 @@ interface Props {
   posts: Post[];
 }
 
-export default function SearchBox({ posts }: Props) {
+class SearchErrorBoundary extends Component<{ children: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          検索を読み込めませんでした。ページを再読み込みしてください。
+        </p>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+function SearchBoxInner({ posts }: Props) {
   const [query, setQuery] = useState('');
 
   const filteredPosts = useMemo(() => {
@@ -103,5 +125,13 @@ export default function SearchBox({ posts }: Props) {
         </div>
       )}
     </div>
+  );
+}
+
+export default function SearchBox(props: Props) {
+  return (
+    <SearchErrorBoundary>
+      <SearchBoxInner {...props} />
+    </SearchErrorBoundary>
   );
 }
