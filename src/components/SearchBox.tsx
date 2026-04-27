@@ -128,7 +128,7 @@ function SearchBoxInner({ posts }: Props) {
             </ul>
           ) : (
             <p className="px-4 py-3 text-gray-500 dark:text-gray-400">
-              「{query}」に一致する記事が見つかりません
+              「{debouncedQuery}」に一致する記事が見つかりません
             </p>
           )}
         </div>
