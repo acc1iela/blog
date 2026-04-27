@@ -1,4 +1,4 @@
-import { Component, useState, useMemo, useCallback, type ReactNode } from 'react';
+import { Component, useState, useMemo, useCallback, useEffect, type ReactNode } from 'react';
 
 interface Post {
   title: string;
@@ -36,20 +36,29 @@ class SearchErrorBoundary extends Component<{ children: ReactNode }, { hasError:
 
 function SearchBoxInner({ posts }: Props) {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query), 180);
+    return () => clearTimeout(timer);
+  }, [query]);
 
   const filteredPosts = useMemo(() => {
-    if (!query.trim()) return null;
-    const lowerQuery = query.toLowerCase();
+    if (!debouncedQuery.trim()) return null;
+    const lowerQuery = debouncedQuery.toLowerCase();
     return posts.filter(
       (post) =>
         post.title.toLowerCase().includes(lowerQuery) ||
         post.description.toLowerCase().includes(lowerQuery) ||
         post.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
     );
-  }, [query, posts]);
+  }, [debouncedQuery, posts]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Escape') setQuery('');
+    if (e.key === 'Escape') {
+      setQuery('');
+      setDebouncedQuery('');
+    }
   }, []);
 
   const formatDate = (dateString: string) => {
