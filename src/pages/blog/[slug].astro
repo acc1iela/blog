@@ -74,7 +74,7 @@ const breadcrumbLd = {
               <span>|</span>
               <span>
                 更新:{' '}
-                <time datetime={post.data.updatedAt!.toISOString()}>{formattedUpdatedAt}</time>
+                <time datetime={post.data.updatedAt?.toISOString()}>{formattedUpdatedAt}</time>
               </span>
             </>
           )
@@ -88,7 +88,7 @@ const breadcrumbLd = {
           post.data.tags.map((tag) => (
             <a
               href={`/blog/tag/${tag}`}
-              class="rounded-full bg-gray-100 px-3 py-1 text-sm text-gray-600 transition-colors hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300"
+              class="tag-btn bg-gray-100 text-gray-600 hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300"
             >
               {tag}
             </a>
