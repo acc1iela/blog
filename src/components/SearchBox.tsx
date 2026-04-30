@@ -34,6 +34,16 @@ class SearchErrorBoundary extends Component<{ children: ReactNode }, { hasError:
   }
 }
 
+const dateFormatter = new Intl.DateTimeFormat('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+function formatDate(dateString: string): string {
+  return dateFormatter.format(new Date(dateString));
+}
+
 function SearchBoxInner({ posts }: Props) {
   const [query, setQuery] = useState('');
   const [debouncedQuery, setDebouncedQuery] = useState('');
@@ -60,14 +70,6 @@ function SearchBoxInner({ posts }: Props) {
       setDebouncedQuery('');
     }
   }, []);
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('ja-JP', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
 
   return (
     <div className="relative">
