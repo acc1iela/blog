@@ -11,7 +11,7 @@ const { tags, activeTag } = Astro.props;
   <a
     href="/blog"
     class:list={[
-      'rounded-full px-3 py-1 text-sm transition-colors',
+      'tag-btn',
       !activeTag
         ? 'bg-accent text-white'
         : 'bg-gray-100 text-gray-600 hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300',
@@ -24,7 +24,7 @@ const { tags, activeTag } = Astro.props;
       <a
         href={`/blog/tag/${tag}`}
         class:list={[
-          'rounded-full px-3 py-1 text-sm transition-colors',
+          'tag-btn',
           activeTag === tag
             ? 'bg-accent text-white'
             : 'bg-gray-100 text-gray-600 hover:bg-accent hover:text-white dark:bg-gray-800 dark:text-gray-300',
