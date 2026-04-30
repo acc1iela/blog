@@ -17,6 +17,10 @@
   .container-width {
     @apply mx-auto max-w-4xl px-4 sm:px-6 lg:px-8;
   }
+
+  .tag-btn {
+    @apply rounded-full px-3 py-1 text-sm transition-colors;
+  }
 }
 
 /* SP対応: テーブルとコードブロックの横スクロール */
